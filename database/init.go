@@ -1,19 +1,25 @@
 package database
 
 import (
-	"os"
 
-	"github.com/jackc/pgx/v5"
 )
 
-type PostGresStore struct {
-	db *pgx.Conn
-}
+func (s *PostGresStore) InitTable() error {
+	query := `
+	CREATE TABLE IF NOT EXISTS posts (
+		id SERIAL PRIMARY KEY,
+		title VARCHAR(50) NOT NULL,
+		content TEXT NOT NULL,
+		category VARCHAR(50) NOT NULL,
+		tags TEXT[] NOT NULL,
+		created_at TIMESTAMP WITH TIME ZONE CURRENT_TIMESTAMP,
+		updated_at TIMESTAMP WITH TIME ZONE CURRENT_TIMESTAMP
+	)`
 
-func NewPostGresStore() (*PostgresStore, error) {
-	connStr := os.Getenv("DATABASE_URL")
-	if connStr == ""  {
-		connStr = "postgres://<user>:<password>@localhost:5432/blog_db?sslmode=disable"
-		log.Printf("WARNING: Using default DB connection string. Set DATABASE_URL env var for production.")
+	_, err := s.db.Exec(context.Background(), query)
+	if err != nil {
+		return fmt.Errorf("error creating posts table : %w", err)
 	}
+	log.Println("PostgreSQL table 'posts' initialized successfully.")
+	return nil
 }
