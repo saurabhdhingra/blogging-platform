@@ -1,7 +1,19 @@
 package database
 
 import (
+	"context"
+	"encoding/json"
+	"fmt"
+	"log"
+	"net/http"
+	"os"
+	"strconv"
+	"strings"
+	"time"
 
+	"github.com/go-chi/chi/v5" // Recommended router for clean REST handling
+	"github.com/go-chi/chi/v5/middleware"
+	"github.com/jackc/pgx/v5" 
 )
 
 func (s *PostGresStore) InitTable() error {
