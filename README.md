@@ -177,4 +177,4 @@ Response:
 404 Not Found: If the post ID does not exist.
 
 ## Acknowledgements
-https://roadmap.sh/projects/url-shortening-service
+https://roadmap.sh/projects/blogging-platform-api
