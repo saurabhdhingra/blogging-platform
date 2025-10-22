@@ -18,7 +18,7 @@ This is a robust, RESTful API built in Go (Golang) with PostgreSQL persistence t
 
 The application follows a standard, scalable Go project layout:
 
-'''
+```
 blog-api/
 ├── cmd/
 │   └── main.go           # Application entry point, server setup, and routing.
@@ -30,7 +30,7 @@ blog-api/
     │   └── post.go       # Data structures for requests, responses, and database.
     └── store/
         └── postgres.go   # Data access layer (PostgreSQL connection and CRUD operations).
-'''
+```
 
 ## Setup and Running
 
@@ -44,25 +44,25 @@ blog-api/
 
 ### Initialize Go Module
 
-'''
+```
 go mod init blog-api
 go mod tidy
-'''
+```
 
 ### Configure Database
 You must set the DATABASE_URL environment variable before running the application. This URL tells the application how to connect to your PostgreSQL server.
 
-'''
+```
 # Example for Linux/macOS
 export DATABASE_URL="postgres://user:password@localhost:5432/blog_db?sslmode=disable"
-'''
+```
 
 Run the Server
 The application will automatically connect to the database and create the posts table if it doesn't already exist.
 
-'''
+```
 go run cmd/main.go
-'''
+```
 
 The API will start on http://localhost:8080.
 
@@ -80,14 +80,14 @@ Description     Creates a new blog post.
 
 Request Body Example:
 
-'''
+```
 {
   "title": "A Look at Go's Concurrency",
   "content": "Exploring goroutines and channels in Go.",
   "category": "Technology",
   "tags": ["Go", "Concurrency", "Programming"]
 }
-'''
+```
 
 Responses:
 
@@ -103,17 +103,17 @@ Endpoint        /posts
 
 Description     Retrieves all blog posts.
 
-'''
+```
 GET /posts?term={search_term}
-'''
+```
 
 Filters posts by a search term in title, content, or category.
 
 Request Example (Search):
 
-'''
+```
 GET /posts?term=Concurrency
-'''
+```
 
 Response:
 
@@ -145,14 +145,14 @@ Description     Updates all fields of an existing post.
 
 Request Body Example (Same structure as POST):
 
-'''
+```
 {
   "title": "The Updated Go Concurrency Guide",
   "content": "Updated content focusing on Go's scheduler.",
   "category": "Technology",
   "tags": ["Go", "Concurrency", "Advanced"]
 }
-'''
+```
 
 Responses:
 
